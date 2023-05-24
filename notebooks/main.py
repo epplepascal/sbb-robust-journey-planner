@@ -133,6 +133,20 @@ min_w = widgets.Dropdown(
     value=0,
     description='M:',
     layout=Layout(width='140px'))
+
+#slider for uncertainty
+confidence_w = widgets.IntSlider(
+    value=100,
+    min=0,
+    max=100,
+    step=1,
+    description='Confidence:',
+    disabled=False,
+    continuous_update=False,
+    orientation='horizontal',
+    readout=True,
+    readout_format='d'
+)
 #Enter button
 enter_b = Button(description='Enter',
            layout=Layout(width='300px'))
@@ -141,7 +155,7 @@ enter_b.style.button_color = 'lightblue'
 time_items=[hour_w,min_w]
 sub_box = HBox(children=time_items)
 #Overall widget box
-items = [start_w,stop_w,date_w,sub_box]
+items = [start_w,stop_w,date_w,sub_box, confidence_w]
 big_box = VBox(children=items) # Vertical display
 
 display(big_box) 
@@ -159,6 +173,7 @@ def on_button_clicked(b):
         # Get the day of the week
         day_of_week = date_w.value.strftime('%A')
         print('On a :', day_of_week)
+        print('With a confidence of :', confidence_w.value)
         print('WARNING! AS IT IS NOW THE JOURNEY SHOWN ON THE MAP HAS NOTHING TO DO WITH THE ACTUAL INPUT DESTINATIONS')
         
         ## IN HERE WE NEED TO PUT THE STOPS IN THE ORDER THAT WE WANT TO MAKE
