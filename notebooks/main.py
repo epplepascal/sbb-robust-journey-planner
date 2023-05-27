@@ -47,16 +47,11 @@ def unique_sorted_values(array):
 
 
 # %%
-list_color=['#636EFA', # the plotly blue you can see above
- '#EF553B',
- '#00CC96',
- '#AB63FA',
- '#FFA15A',
- '#19D3F3',
- '#FF6692',
- '#B6E880',
- '#FF97FF',
- '#FECB52']
+list_color=['#636EFA', # Bus color
+ '#EF553B', # Tram color
+ '#00CC96', # Train color
+ '#808080',# 'Other' color
+'#FFD700'] # Walking color
 
 # %%
 import plotly.graph_objects as go
@@ -64,26 +59,31 @@ import plotly.graph_objects as go
 def plot_map(journey_df):
     fig = go.Figure()
    
-    for i in range(len(journey_df)):
+    for i in range(len(journey_df)-1):
         # Below for segment between stations
+        print('bla',journey_df.iloc[i:i+2]['latitude'].tolist())
         fig.add_trace(go.Scattermapbox(
             #mode = "markers",
             mode= "lines",
+            name='WE NEED TO PUT THE TYPE OF TRANSPORT <br>From '+journey_df.iloc[i]['stop_name']+'Try to put the time maybe'+\
+            '<br>To '+ journey_df.iloc[i+1]['stop_name'],
             lat = journey_df.iloc[i:i+2]['latitude'].tolist(),
             lon = journey_df.iloc[i:i+2]['longitude'].tolist(),
-            hovertext = journey_df['stop_name'].tolist(),
-            marker = {'color': list_color[i], 
+            marker = {'color': list_color[0], #Here put the color associated with the type of transport!
                       "size": 10},
         ))
-        # Below for dot at stations
-        fig.add_trace(go.Scattermapbox(
+
+    # Below for dot at stations
+    fig.add_trace(go.Scattermapbox(
             mode = "markers",
             lat = journey_df['latitude'].tolist(),
             lon = journey_df['longitude'].tolist(),
             hovertext = journey_df['stop_name'].tolist(),
+            hovertemplate="<br>".join([ "Stop: %{hovertext}","<extra></extra>"]),
             marker = {'color': 'black', 
                       "size": 10},
-        ))
+            showlegend=False
+        ))   
         
     # To display the maps at the good location
     mean_lat=journey_df['latitude'].mean()
@@ -179,8 +179,9 @@ def on_button_clicked(b):
         ## IN HERE WE NEED TO PUT THE STOPS IN THE ORDER THAT WE WANT TO MAKE
         ## THE JOURNEY! THEN THE PLOT_MAP FCT DO THE REST
         row_1 =zurich_stops_df.loc[zurich_stops_df['stop_name'] == start_w.value].iloc[0:1]
+        row_middle_stop=zurich_stops_df.loc[zurich_stops_df['stop_name'] == 'Zürich HB'].iloc[0:1]
         row_2=zurich_stops_df.loc[zurich_stops_df['stop_name'] == stop_w.value].iloc[0:1]
-        journey_df=pd.concat([row_1,row_2])
+        journey_df=pd.concat([row_1,row_middle_stop,row_2])
         display(journey_df)
         #journey_df=stops_zurich.tail(5) #
         plot_map(journey_df)
