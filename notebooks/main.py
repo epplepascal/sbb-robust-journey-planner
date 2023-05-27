@@ -185,6 +185,8 @@ def on_button_clicked(b):
         display(journey_df)
         #journey_df=stops_zurich.tail(5) #
         plot_map(journey_df)
+        # To see if it's not a problem to plot two times
+        plot_map(journey_df)
 
 enter_b.on_click(on_button_clicked)
 
