@@ -1,3 +1,4 @@
+<!-- #region -->
 # Final Assignment: Robust Journey Planning
 
 **Executive summary:** build a robust SBB journey planner for the Zürich area, and make a short video presentation of it, to be done in **groups of 5 or 6**.
@@ -40,6 +41,14 @@ To pull the latest changes from git LFS, please run the following command:
 git lfs pull
 ```
 - **Final Journey Planner**
+
+The user may select their departure and arrival stations. The day of the trip must be provided as well as the desired departure time and latest possible arrival time. Finally, a slider allows the user to filter trips that have a low probability of success. The button 'Enter' must then be pressed to run the processing.
+
+<p align="center">
+  <img src="../figs/widget.png" width="300" title="hover text">
+</p>
+
+
 - **Performance evaluation**
 
 In order to provide an objective evaluation of the algorithm we implemented, we decided to compare it with Google Maps. So, we selected 900 random combinations of the stops in Zürich and input these on Google Maps and on our algorithm. Thhe comparison is made taking the difference between the performance of Google Maps and our algorithm based on the following parameters:
@@ -57,6 +66,9 @@ In these plots the distribution of the difference between Google Maps and our al
 - **Limitation and Advantages of our solution**:
 Let’s consider the advantages and limitations of our solution. One limitation it’s that on average we compute 11 changes and this is a considerable amount which may be non optimal for the user. This is due to the fact we did not implement a limit on the number of changes. Another limitation is that the walking time is computed on on-flight distance, therefore disregarding buildings, elevation and other factors. Instead, the main advantage of our solution is the fact that, with respect to Google Maps, it’s adding the success probability of the trips, but still performing comparably.
 
+
+
+<!-- #endregion -->
 
 ----
 ## Important Dates
