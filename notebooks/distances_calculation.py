@@ -14,9 +14,9 @@
 # ---
 
 # %% [markdown]
-# # Distances between stops calculation
+# # zurich_df creation and distances between stops calculation
 #
-# In this notebook we want to calculate the distances between the stops in zurich (df_zurich). <br>
+# In this notebook we generate the dataframe containing stops around zurich and want to calculate the distances between the stops in zurich (df_zurich). <br>
 # We will keep only the stops that are closer than 500 meters between each other since this is the total distance which is allowed in our trips and that our algorithm should be considering.
 
 # %% [markdown]
@@ -31,7 +31,91 @@ import matplotlib.pyplot as plt
 import warnings
 import plotly.express as px
 import plotly.graph_objects as go
+import math
 warnings.simplefilter(action='ignore', category=UserWarning)
+
+# %% [markdown]
+# ##  Creation of dataframe containing stops 30km around Zürich
+
+# %%
+from pyhive import hive
+
+# Set python variables from environment variables
+username = os.environ['USERNAME']
+hive_host = os.environ['HIVE_SERVER2'].split(':')[0]
+hive_port = os.environ['HIVE_SERVER2'].split(':')[1]
+
+# create connection
+conn = hive.connect(
+    host=hive_host,
+    port=hive_port)
+
+# create cursor
+cur = conn.cursor()
+
+print(f"your username is {username}")
+print(f"you are connected to {hive_host}:{hive_port}")
+
+# %%
+query = f"""
+    DROP TABLE IF EXISTS {username}.allstops
+"""
+cur.execute(query)
+
+# %%
+query = f"""
+    CREATE EXTERNAL TABLE {username}.allstops(
+        stop_id STRING,
+        stop_name STRING,
+        latitude FLOAT,
+        longitude FLOAT,
+        location_type STRING,
+        parent_station STRING
+    )
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ';'
+    STORED AS ORC
+    LOCATION '/data/sbb/orc/allstops/'
+"""
+cur.execute(query)
+
+# %%
+df = pd.read_sql(f'SELECT * FROM {username}.allstops', conn)
+
+# %%
+df.head()
+
+# %%
+earth_radius = 6378.0
+zurich_avg_altitude = 0.408 
+earth_circumference = 40075.0
+
+def distance(lat1, lon1, lat2, lon2, earth_circumference=earth_circumference):
+
+    km_per_deg_lat, km_per_deg_lon = earth_circumference / 360.0, math.cos(math.pi * lat2 / 180.0) * km_per_deg_lat
+    delta_x, delta_y = abs(lon2 - lon1) * km_per_deg_lon, abs(lat2 - lat1) * km_per_deg_lat
+    return math.sqrt(delta_x*delta_x + delta_y*delta_y)
+
+def dist_from_center(lat_lon_row, central_lat=47.378177, central_lon=8.540192, earth_circumference=earth_circumference):
+
+    return distance(lat_lon_row['allstops.latitude'], lat_lon_row['allstops.longitude'], central_lat, central_lon, earth_circumference)
+
+
+# %%
+df.head()
+
+# %%
+max_dist=30.0
+df['center_dist'] = df.apply(dist_from_center, axis=1)
+df_zurich = df[df.center_dist <= max_dist]
+
+# %%
+df_zurich.head()
+
+# %% [markdown]
+# Now that the dataframe has been created, we need to send it to hdfs. We do so by running the following command in the terminal:
+#
+# ```hdfs dfs -copyFromLocal df_zurich.csv /user/username/work/```
+#   
 
 # %%
 # %load_ext sparkmagic.magics
