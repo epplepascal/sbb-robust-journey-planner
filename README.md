@@ -1,3 +1,4 @@
+<!-- #region -->
 # Final Assignment: Robust Journey Planning
 
 **Executive summary:** build a robust SBB journey planner for the Zürich area, and make a short video presentation of it, to be done in **groups of 5 or 6**.
@@ -54,13 +55,6 @@ After the processing is done, the user receives a list of possible trips that me
   <img src="../figs/journey.jpeg" width="600" title="Trip info">
 </p>
 
-- **Probability of successful trip**
-
-To compute the probability that a trip is successful, we first need to determine what would make it successful. Our trip is successful if all connections during that journey were completed on time. During a journey, we might need to change transportation several times. At each transfer, we have a certain spare time determined by substracting the arrival time of the transportation, we just left, to the departure time of the following transportation. We need however, to be careful when a walking time is needed between two transportations. <br>
-We then need to substract the walking time to the previous calculated spare time. The result obtained can be considered as the acceptable delay that the transportation we just left can have. A larger delay would induce a failed connection leading to a failed trip. Thanks to the the previous computed delay distribution, we determine the probability to suffer a delay smaller or equal to the previous result calculated. This probability is the probability that the connection is successful.<br>
-We also assumed that delays are independent from each other. This means that we can compute the probability of each connection to be successful. As those probabilities are independent, we can multiplicate them with each other to obtain the final probability that the trip is successful.
-
-Note: We assumed a spare time of 120 seconds when the journey is finishing by a walking path.
 
 - **Performance evaluation**
 
@@ -81,7 +75,7 @@ Let’s consider the advantages and limitations of our solution. One limitation 
 
 
 
-
+<!-- #endregion -->
 
 ----
 ## Important Dates
