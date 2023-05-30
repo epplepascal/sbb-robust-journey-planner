@@ -29,7 +29,22 @@
 ----
 ## HOW-TO
 
-This section intentionally blank. Students must complete it with instructions on how to use the code in their project.
+There a two main files inside the `notebooks` folder that need to be run, named `trip_planner.py` and `performance_evaluation.py`. The first one implements our final journey planner and the second one evaluates its performance against Google Map's API.
+
+We provide a detailed tutorial the usage of these two files down below.
+
+The other files in the `notebooks` folder are purely meant for data-preprocessing purposes to create the datasets that are already provided in this repository in the `data` folder and on Git LFS.
+
+To pull the latest changes from git LFS, please run the following command:
+```
+git lfs pull
+```
+- **Final Journey Planner**
+Some description of the journey planner
+- **Performance evaluation**
+
+Some description about
+
 
 ----
 ## Important Dates
