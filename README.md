@@ -44,7 +44,13 @@ git lfs pull
 The user may select their departure and arrival stations. The day of the trip must be provided as well as the desired departure time and latest possible arrival time. Finally, a slider allows the user to filter trips that have a low probability of success. The button 'Enter' must then be pressed to run the processing.
 
 <p align="center">
-  <img src="../figs/widget.png" width="300" title="hover text">
+  <img src="../figs/widget.png" width="300" title="User interface">
+</p>
+
+After the processing is done, the user receives a list of possible trips that meet their query. It is provided both as a textual description with the time and place of all transits, as well as on a map to help visualize the journey.
+
+<p align="center">
+  <img src="../figs/journey.jpeg" width="600" title="Trip info">
 </p>
 
 - **Probability of successful trip**
