@@ -41,6 +41,7 @@ git lfs pull
 ```
 - **Final Journey Planner**
 
+To use our journey planner one must run the file calle **trip_planner.py** <br>
 The user may select their departure and arrival stations. The day of the trip must be provided as well as the desired departure time and latest possible arrival time. Finally, a slider allows the user to filter trips that have a low probability of success. The button 'Enter' must then be pressed to run the processing.
 
 <p align="center">
