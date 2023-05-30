@@ -1,5 +1,5 @@
 <!-- #region -->
-# Final Assignment: Robust Journey Planning
+# Final Assignment: Robust Journey Planning 🫑
 
 **Executive summary:** build a robust SBB journey planner for the Zürich area, and make a short video presentation of it, to be done in **groups of 5 or 6**.
 
