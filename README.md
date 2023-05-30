@@ -40,10 +40,22 @@ To pull the latest changes from git LFS, please run the following command:
 git lfs pull
 ```
 - **Final Journey Planner**
-Some description of the journey planner
 - **Performance evaluation**
 
-Some description about
+In order to provide an objective evaluation of the algorithm we implemented, we decided to compare it with Google Maps. So, we selected 900 random combinations of the stops in Zürich and input these on Google Maps and on our algorithm. Thhe comparison is made taking the difference between the performance of Google Maps and our algorithm based on the following parameters:
+- total trip duration
+- number of changes
+- walking time
+In these plots the distribution of the difference between Google Maps and our algorithm is displayed:<br>
+<p align="center">
+  <img src="../figs/evaluat.png" width="1000" title="hover text">
+</p>
+1. **Total distance**: The first plot shows the difference in total trip's duration between Google Maps and our algorithm. The negative values mean that Google Maps' trip is faster that the one we propose with our algorithm and viceversa. It shows that Google Maps it’s on average faster of 0.40 minutes than our algorithms, which is a negligible difference. The maximum delay computed is 2 minutes with respect to Google maps, while there are a little percentage of times when the algorithm proposes a shorter path than Google Maps. 
+2. **Number of changes**: The central plot shows the difference in number of changes of means of transport between Google Maps and our algorithm. Negative values mean that Google maps propose a trip which requires more changes. It shows that Google Maps it’s on average proposing less trips than our algorithm, specifically an average of 8.76 less changes than our algorithm. This may be due to the fact that Google Maps imposes a limit on the number of changes per hour inn order to be more user friendly while we did not introduce and threshold. 
+3. **Walking time**: The right plot shows the difference in total time spent walking over the trip between Google Maps and our algorithm. Negative values mean that Google Maps proposes a trip which requires less time walking than ours and viceversa. It shows that Google Maps it’s on average proposing trips that require walking the same amount of minutes than our algorithm, since the distribution is approximately centred on zero.
+
+- **Limitation and Advantages of our solution**:
+Let’s consider the advantages and limitations of our solution. One limitation it’s that on average we compute 11 changes and this is a considerable amount which may be non optimal for the user. This is due to the fact we did not implement a limit on the number of changes. Another limitation is that the walking time is computed on on-flight distance, therefore disregarding buildings, elevation and other factors. Instead, the main advantage of our solution is the fact that, with respect to Google Maps, it’s adding the success probability of the trips, but still performing comparably.
 
 
 ----

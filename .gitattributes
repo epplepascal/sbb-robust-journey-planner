@@ -1,1 +1,2 @@
 data/df_with_transfer_time.csv filter=lfs diff=lfs merge=lfs -text
+figs/evaluat.png filter=lfs diff=lfs merge=lfs -text
