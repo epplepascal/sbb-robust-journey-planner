@@ -46,13 +46,13 @@ To use our journey planner one must run the file calle **trip_planner.py** <br>
 The user may select their departure and arrival stations. The day of the trip must be provided as well as the desired departure time and latest possible arrival time. Finally, a slider allows the user to filter trips that have a low probability of success. The button 'Enter' must then be pressed to run the processing.
 
 <p align="center">
-  <img src="../figs/widget.png" width="300" title="User interface">
+  <img src="./figs/widget.png" width="300" title="User interface">
 </p>
 
 After the processing is done, the user receives a list of possible trips that meet their query. It is provided both as a textual description with the time and place of all transits, as well as on a map to help visualize the journey.
 
 <p align="center">
-  <img src="../figs/journey.jpeg" width="600" title="Trip info">
+  <img src="./figs/journey.jpeg" width="600" title="Trip info">
 </p>
 
 
@@ -64,7 +64,7 @@ In order to provide an objective evaluation of the algorithm we implemented, we 
 - walking time
 In these plots the distribution of the difference between Google Maps and our algorithm is displayed:<br>
 <p align="center">
-  <img src="../figs/evaluat.png" width="1000" title="hover text">
+  <img src="./figs/evaluat.png" width="1000" title="hover text">
 </p>
 1. **Total distance**: The first plot shows the difference in total trip's duration between Google Maps and our algorithm. The negative values mean that Google Maps' trip is faster that the one we propose with our algorithm and viceversa. It shows that Google Maps it’s on average faster of 0.40 minutes than our algorithms, which is a negligible difference. The maximum delay computed is 2 minutes with respect to Google maps, while there are a little percentage of times when the algorithm proposes a shorter path than Google Maps. 
 2. **Number of changes**: The central plot shows the difference in number of changes of means of transport between Google Maps and our algorithm. Negative values mean that Google maps propose a trip which requires more changes. It shows that Google Maps it’s on average proposing less trips than our algorithm, specifically an average of 8.76 less changes than our algorithm. This may be due to the fact that Google Maps imposes a limit on the number of changes per hour inn order to be more user friendly while we did not introduce and threshold. 
